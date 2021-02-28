@@ -8,19 +8,17 @@ const copyFile = require("cp-file")
 module.exports = {
   onPostBuild: async ({ constants: { FUNCTIONS_DIST } }) => {
     const chunks = fs.readdirSync("./.next/serverless");
-    console.log('CHUNKS', typeof chunks)
     Object.keys(chunks).forEach(async (i) => {
       const chunk = chunks[i]
-      console.log('????', chunk, FUNCTIONS_DIST)
-      console.log(path.resolve(FUNCTIONS_DIST, chunk))
-      if (chunk.includes('header') || chunk.includes('footer')) {
-        await copyFile(path.resolve('.', '.next/serverless', chunk), path.resolve(FUNCTIONS_DIST, chunk))
-      }
-      // const zipName = path.join(FUNCTIONS_DIST, chunk + ".zip")
-      // const zip = new AdmZip(zipName)
-      // const chunkPath = path.join('.', '.next/serverless', chunk)
-      // zip.addLocalFile(chunk, chunk)
-      // zip.writeZip(zipName)
+      // console.log('????', chunk, FUNCTIONS_DIST)
+      // console.log(path.resolve(FUNCTIONS_DIST, chunk))
+      // if (chunk.includes('header') || chunk.includes('footer')) {
+      //   await copyFile(path.resolve('.', '.next/serverless', chunk), path.resolve(FUNCTIONS_DIST, chunk))
+      // }
+      const zipName = path.join(FUNCTIONS_DIST, chunk + ".zip")
+      const zip = new AdmZip(zipName)
+      zip.addLocalFile(chunk, "../" + chunk)
+      zip.writeZip(zipName)
     });
   }
 }
