@@ -15,9 +15,9 @@ module.exports = {
       // if (chunk.includes('header') || chunk.includes('footer')) {
       //   await copyFile(path.resolve('.', '.next/serverless', chunk), path.resolve(FUNCTIONS_DIST, chunk))
       // }
-      const zipName = path.join(FUNCTIONS_DIST, chunk + ".zip")
+      const zipName = path.join(FUNCTIONS_DIST, "../", chunk + ".zip")
       const zip = new AdmZip(zipName)
-      zip.addLocalFile(chunk, "../" + chunk)
+      zip.addLocalFile(chunk, chunk)
       zip.writeZip(zipName)
     });
   }
