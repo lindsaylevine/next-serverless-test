@@ -17,7 +17,7 @@ module.exports = {
       // }
       const zipName = path.join(FUNCTIONS_DIST, "../", chunk + ".zip")
       const zip = new AdmZip(zipName)
-      zip.addLocalFile(chunk, chunk)
+      zip.addLocalFile(chunk, "../" + chunk)
       zip.writeZip(zipName)
     });
   }
